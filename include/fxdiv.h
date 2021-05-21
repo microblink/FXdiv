@@ -188,7 +188,12 @@ static inline struct fxdiv_divisor_uint32_t fxdiv_init_uint32_t(uint32_t d) {
 }
 
 #ifdef __clang__
-    __attribute__(( no_sanitize( "unsigned-integer-overflow" ), no_sanitize( "unsigned-shift-base" ) ))
+    __attribute__((
+		no_sanitize( "unsigned-integer-overflow" )
+#if __clang_major__ >= 12
+		, no_sanitize( "unsigned-shift-base" )
+#endif
+	))
 #endif
 static inline struct fxdiv_divisor_uint64_t fxdiv_init_uint64_t(uint64_t d) {
 	struct fxdiv_divisor_uint64_t result = { d };
