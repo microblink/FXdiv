@@ -190,7 +190,7 @@ static inline struct fxdiv_divisor_uint32_t fxdiv_init_uint32_t(uint32_t d) {
 #ifdef __clang__
     __attribute__((
 		no_sanitize( "unsigned-integer-overflow" )
-#if __clang_major__ >= 12
+#if __clang_major__ >= 12 && !defined( __APPLE__ )
 		, no_sanitize( "unsigned-shift-base" )
 #endif
 	))
